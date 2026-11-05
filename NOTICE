@@ -1,0 +1,17 @@
+# Aviso de atribución
+
+`lib/client.js` es una copia modificada de
+`@deepseek-ai/dsh-experimental-client-ui-voice-input` versión `0.2.1-rc.2`,
+Copyright (c) 2026 DeepSeek, publicado bajo licencia MIT.
+
+Modificaciones realizadas para este plugin:
+
+- el identificador del bundle pasa a `@senit/dsh-voice-gemini`;
+- el enlace de ajustes y las ranuras `plugins.bundle.config` /
+  `plugins.bundle.activation` apuntan a este bundle;
+- se añadió la etiqueta de idioma `es` («Spanish» / «西班牙语»);
+- se amplió el aviso de privacidad del modo local para mencionar la corrección
+  del texto con DeepSeek;
+- se eliminó el comentario `sourceMappingURL`.
+
+El texto completo de la licencia MIT está en `LICENSE`.

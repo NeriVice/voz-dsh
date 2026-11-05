@@ -1,0 +1,37 @@
+# Capa de configuración del bundle «Dictado por voz».
+#
+# Compone el servicio de reconocimiento, los dos proveedores de este paquete
+# (Whisper local + DeepSeek y Gemini), el Remote autenticado que usa el
+# navegador y el control de micrófono del compositor.
+# Los ids son propios para no chocar con el bundle experimental oficial
+# «Voice input» (SenseVoice), que puede convivir desactivado.
+- insert:
+    - id: voz-speech
+      name: '@deepseek-ai/dsh-experimental-speech-to-text'
+      config:
+        # Whisper local transcribe; DeepSeek corrige solo el texto.
+        defaultProvider: whisper-dsv4
+        language: es
+
+    # Este paquete aporta las dos mitades: los proveedores en el Host y el
+    # control de micrófono + panel de preferencias en el navegador.
+    - id: voz-gemini
+      name: '@senit/dsh-voice-gemini'
+      config:
+        local:
+          dataRoot: !!js dshHomePath('speech-to-text', 'whisper-tiny')
+          cleanup: true
+          cleanupModel: deepseek-flash
+          threads: 4
+        gemini:
+          model: gemini-3.5-flash-lite
+          # Ruta absoluta resuelta por el propio DSH (~/.dsh/voice-gemini.key).
+          apiKeyFile: !!js dshHomePath('voice-gemini.key')
+          timeoutMs: 60000
+
+    - id: voz-api
+      name: '@deepseek-ai/dsh-experimental-api-speech-to-text'
+      config:
+        # 4 MiB y 120 s: suficiente para un prompt largo sin bloquear el Host.
+        maxAudioBytes: 4194304
+        maxDurationSeconds: 120

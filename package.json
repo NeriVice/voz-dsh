@@ -1,0 +1,56 @@
+{
+  "name": "@senit/dsh-voice-gemini",
+  "version": "0.1.0",
+  "description": "Dictado por voz en español para DSH: graba desde el micrófono y transcribe con Gemini.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./provider": "./lib/provider.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "DESIGN.md",
+    "NOTICE",
+    "README.md",
+    "cordis.patch.yml",
+    "icon.svg",
+    "lib",
+    "locale",
+    "scripts"
+  ],
+  "icon": "./icon.svg",
+  "keywords": [
+    "dsh-plugin",
+    "dsh-bundle",
+    "voice",
+    "speech-to-text",
+    "spanish"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-ui-plugin-manager"
+      ],
+      "platform": "web",
+      "external": [
+        "@deepseek-ai/dsh-api-gateway/client"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "setup-runtime": "node scripts/link-runtime.mjs"
+  }
+}
