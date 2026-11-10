@@ -100,6 +100,12 @@ más útiles:
 | Duración máxima | 120 s | `voz-api`, `config.maxDurationSeconds` |
 | Tamaño máximo | 4 MiB | `voz-api`, `config.maxAudioBytes` |
 
+`local.threads` merece un ajuste según la CPU. Medido con 10,5 s de audio en un
+i7-6600U (2 núcleos físicos, 4 lógicos): 1 hilo → 1046 ms, **2 hilos → 915 ms**,
+3 hilos → 949 ms, 4 hilos → 1131 ms. En portátiles de 2 núcleos, `threads: 2` es
+lo más rápido: con más hilos el decodificador compite consigo mismo y con el
+navegador.
+
 Para un dictado **totalmente offline** (sin enviar ni el texto a DeepSeek),
 pon `local.cleanup: false`. Whisper seguirá transcribiendo en tu equipo; el
 texto puede salir con errores en nombres propios.
@@ -132,6 +138,13 @@ Con un i7-6600U (4 hilos, sin GPU):
   Whisper tiny ~3,0 s + DeepSeek ~1,3 s = **~4,6 s** de extremo a extremo.
 - Gemini 3.5 Flash Lite: **~1,6 s** para 11,7 s de audio.
 
+Desglose local con `threads: 2` (audio de 4,7 s, proceso ya caliente):
+
+- Whisper tiny solo: ~0,9 s por cada 10 s de audio.
+- Corrección con `deepseek-flash`: **~+0,86 s** por dictado.
+- El primer dictado tras arrancar paga además ~1 s de carga del modelo; el
+  proceso de reconocimiento queda vivo entre dictados.
+
 Whisper tiny es rápido pero puede confundir nombres propios («Deep Sleep
 Harness»); la corrección de DeepSeek los arregla en la mayoría de los casos.
 Si necesitas más precisión sin nube, se puede subir a Whisper base o small
@@ -141,7 +154,7 @@ Si necesitas más precisión sin nube, se puede subir a Whisper base o small
 
 DSH también ofrece el bundle experimental **Voice input** con SenseVoice. No lo
 actives a la vez que este plugin: ambos registran el mismo servicio de voz y el
-mismo control del compositor. «Voice dictation» ya incluye sus dos motores y su
+mismo control del compositor. «DSH Voice prompter» ya incluye sus dos motores y su
 propia UI; «Voice input» puede quedarse apagado.
 
 ## Desarrollo y pruebas
