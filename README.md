@@ -39,16 +39,12 @@ dsh plugin --profile web add /ruta/a/voz-dsh
 ```
 
 El comando instala el paquete en el perfil `web`, lo enlaza y selecciona el
-bundle «Voice dictation». Después:
+bundle «DSH Voice prompter». Después:
 
-1. Enlaza el runtime nativo que ya trae DSH (una sola vez):
-
-   ```sh
-   cd /ruta/a/voz-dsh && node scripts/link-runtime.mjs
-   ```
-
-   El plugin no duplica los ~100 MB de `sherpa-onnx-node`: usa el que vive en la
-   instalación de `dsh`.
+1. Nada que enlazar: el plugin **encuentra solo** el runtime `sherpa-onnx-node`
+   de la instalación de DSH, aunque reinstales o actualices el paquete. No
+   duplica los ~100 MB; si algún día corre en un entorno donde no lo encuentra,
+   `node scripts/link-runtime.mjs` sigue disponible como plan B.
 
 2. Descarga el modelo de Whisper la primera vez. Al pulsar el micrófono, DSH
    abre el asistente; también puedes ir a **Plugins → Voice dictation →

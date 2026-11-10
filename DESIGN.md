@@ -223,7 +223,8 @@ El proveedor implementa el contrato `SpeechProvider`:
 - **Idioma**: Whisper recibe `es`, `en` o `auto`; cambiar de idioma recrea el
   reconocedor.
 - **Runtime**: no se duplica `sherpa-onnx-node`; se enlaza el que ya instala
-  DSH con `scripts/link-runtime.mjs`.
+  DSH de forma automática (el Host resuelve `sherpa-onnx-node` desde su propia
+  instalación; `scripts/link-runtime.mjs` queda como plan B).
 
 ### 4.4 Corrección con DeepSeek
 
@@ -337,7 +338,8 @@ valor por defecto es tiny + corrección.
 ## 9. Operación
 
 - Instalación: `dsh plugin --profile web add /ruta/a/voz-dsh`.
-- Runtime: `node scripts/link-runtime.mjs` enlaza el `sherpa-onnx-node` de DSH.
+- Runtime: el Host resuelve `sherpa-onnx-node` dentro de la instalación de DSH y
+  se lo pasa al hijo por entorno; no hace falta enlace ni reinstalar nada.
 - Modelo: se descarga desde la UI la primera vez (~104 MB) o se copia a
   `~/.dsh/speech-to-text/whisper-tiny`.
 - Clave DeepSeek: la que DSH ya tiene; alternativa `~/.dsh/voice-deepseek.key`.
