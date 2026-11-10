@@ -1,6 +1,6 @@
 {
   "name": "@senit/dsh-voice-prompter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "DSH Voice prompter: dictado por voz en español para DSH — graba desde el micrófono y transcribe en local.",
   "type": "module",
   "main": "lib/index.js",

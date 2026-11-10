@@ -99,12 +99,20 @@ más útiles:
 | Modelo Gemini | `gemini-3.5-flash-lite` | `gemini.model` |
 | Duración máxima | 120 s | `voz-api`, `config.maxDurationSeconds` |
 | Tamaño máximo | 4 MiB | `voz-api`, `config.maxAudioBytes` |
+| Normalización de nivel | activada | `local.normalize` |
 
 `local.threads` merece un ajuste según la CPU. Medido con 10,5 s de audio en un
 i7-6600U (2 núcleos físicos, 4 lógicos): 1 hilo → 1046 ms, **2 hilos → 915 ms**,
 3 hilos → 949 ms, 4 hilos → 1131 ms. En portátiles de 2 núcleos, `threads: 2` es
 lo más rápido: con más hilos el decodificador compite consigo mismo y con el
 navegador.
+
+`local.normalize` ajusta el pico de la grabación a 0,9 antes de reconocer
+(ganancia máxima 10×, y no toca el audio ya silencioso). Con el mismo audio al
+8 % de nivel, activar la normalización devuelve el texto correcto donde sin ella
+Whisper confundía palabras: es la defensa contra micrófonos flojos y contra el
+DSP del navegador. El cliente, además, apaga `noiseSuppression` del micrófono
+(está pensado para llamadas y se come consonantes) y graba a 128 kbps.
 
 Para un dictado **totalmente offline** (sin enviar ni el texto a DeepSeek),
 pon `local.cleanup: false`. Whisper seguirá transcribiendo en tu equipo; el
