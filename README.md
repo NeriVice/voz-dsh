@@ -92,7 +92,8 @@ más útiles:
 | Ajuste | Valor por defecto | Dónde |
 | --- | --- | --- |
 | Motor por defecto | `whisper-dsv4` | `voz-speech`, `config.defaultProvider` |
-| Modelo local | Whisper tiny int8 | `voz-gemini`, `local.dataRoot` |
+| Modelo local | `tiny` (o `base`) | `local.model` |
+| Carpeta del modelo | `~/.dsh/speech-to-text/whisper-<modelo>` | `local.dataRoot` |
 | Corrección DeepSeek | activada | `local.cleanup` |
 | Modelo de corrección | `deepseek-flash` | `local.cleanupModel` |
 | Hilos de CPU | 4 | `local.threads` |
@@ -100,6 +101,11 @@ más útiles:
 | Duración máxima | 120 s | `voz-api`, `config.maxDurationSeconds` |
 | Tamaño máximo | 4 MiB | `voz-api`, `config.maxAudioBytes` |
 | Normalización de nivel | activada | `local.normalize` |
+
+`local.model` elige entre `tiny` (~104 MB, el más rápido) y `base` (~161 MB,
+~1,7× más lento y notablemente mejor con acentos y nombres propios). Cada modelo
+vive en su propia carpeta, así que cambiar entre ellos no vuelve a descargar
+nada. Los archivos se verifican por tamaño y SHA-256 igual que tiny.
 
 `local.threads` merece un ajuste según la CPU. Medido con 10,5 s de audio en un
 i7-6600U (2 núcleos físicos, 4 lógicos): 1 hilo → 1046 ms, **2 hilos → 915 ms**,
