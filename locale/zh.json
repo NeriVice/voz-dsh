@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "语音听写",
+    "title": "DSH Voice prompter",
     "description": "说出你的提示词：转录文本会进入输入框草稿，可继续编辑。"
   }
 }

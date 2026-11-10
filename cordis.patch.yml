@@ -16,7 +16,7 @@
     # Este paquete aporta las dos mitades: los proveedores en el Host y el
     # control de micrófono + panel de preferencias en el navegador.
     - id: voz-gemini
-      name: '@senit/dsh-voice-gemini'
+      name: '@senit/dsh-voice-prompter'
       config:
         local:
           dataRoot: !!js dshHomePath('speech-to-text', 'whisper-tiny')

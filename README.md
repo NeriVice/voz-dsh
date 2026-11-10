@@ -1,4 +1,4 @@
-# Dictado por voz para DSH
+# DSH Voice prompter
 
 Plugin de [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) que
 añade un micrófono al compositor del chat: hablas, el texto aparece **en tu

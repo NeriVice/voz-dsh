@@ -1,7 +1,7 @@
 {
-  "name": "@senit/dsh-voice-gemini",
-  "version": "0.1.0",
-  "description": "Dictado por voz en español para DSH: graba desde el micrófono y transcribe con Gemini.",
+  "name": "@senit/dsh-voice-prompter",
+  "version": "0.2.0",
+  "description": "DSH Voice prompter: dictado por voz en español para DSH — graba desde el micrófono y transcribe en local.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {

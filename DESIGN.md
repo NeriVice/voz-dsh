@@ -160,7 +160,7 @@ Navegador (misma origen)              Host de DSH                            Ser
 | Pieza | Paquete | Papel |
 | --- | --- | --- |
 | Registro y contrato | `dsh-experimental-speech-to-text` | `ctx.speechToText`, selección de proveedor, preparación, cancelación. |
-| Proveedor local | `@senit/dsh-voice-gemini` (este repo) | Whisper tiny + proceso hijo + corrección DeepSeek. |
+| Proveedor local | `@senit/dsh-voice-prompter` (este repo) | Whisper tiny + proceso hijo + corrección DeepSeek. |
 | Proveedor Gemini | el mismo paquete | Transcripción en la nube como alternativa. |
 | Remote del navegador | `dsh-experimental-api-speech-to-text` | Valida base64/WAV, límites y autenticación; nunca crea un evento de sesión. |
 | UI del compositor | `lib/client.js` derivado del oficial | Micrófono, grabación, niveles, inserción, preparación y ajustes. |
@@ -169,7 +169,7 @@ Filas que monta el bundle (`cordis.patch.yml`):
 
 ```yaml
 voz-speech  → dsh-experimental-speech-to-text     defaultProvider: whisper-dsv4, language: es
-voz-gemini  → @senit/dsh-voice-gemini             local + gemini (dos proveedores)
+voz-gemini  → @senit/dsh-voice-prompter             local + gemini (dos proveedores)
 voz-api     → dsh-experimental-api-speech-to-text 4 MiB, 120 s
 ```
 
